@@ -71,10 +71,9 @@ app.get('/api/workers', (req, res) => {
     );
   }
 
-  // أفضل N فنيين بالتقييم
   if (top) {
     list = [...list]
-      .filter(w => (w.reviewsCount || 0) > 0) // 👈 فني بلا تقييمات حقيقية ما بيدخل "أفضل الفنيين" حتى لو rating قديم غير محدّث
+      .filter(w => (w.reviewsCount || 0) > 0) 
       .sort((a, b) => (b.rating || 0) - (a.rating || 0))
       .slice(0, parseInt(top));
   }
@@ -82,14 +81,27 @@ app.get('/api/workers', (req, res) => {
   res.json(list);
 });
 
-// GET /api/workers/:id  — تفاصيل فني واحد
 app.get('/api/workers/:id', (req, res) => {
-  const worker = readDB().workers.find(w => w.id === parseInt(req.params.id));
-  if (!worker) return res.status(404).json({ message: 'الفني غير موجود' });
-  res.json(worker);
+  const db = readDB();
+
+  const worker = db.workers.find(
+    (w) => String(w.id) === String(req.params.id)
+  );
+
+  if (!worker) {
+    return res.status(404).json({
+      message: 'الفني غير موجود',
+    });
+  }
+
+  const {
+    password,
+    ...safeWorker
+  } = worker;
+
+  res.json(safeWorker);
 });
 
-// POST /api/workers  — تسجيل فني جديد (pending)
 app.post('/api/workers', (req, res) => {
   const db = readDB();
   const { fullName, category, residence, detailedAddress, phone, email, password, idImage, portfolioImages } = req.body;
@@ -107,8 +119,7 @@ app.post('/api/workers', (req, res) => {
     category, price: 35,
     workerName: fullName, email, password,
     phone, residence, detailedAddress: detailedAddress || '',
-    status: 'pending', rating: 0, // 👈 كانت 5.0 - فني جديد بلا أي تقييم حقيقي كان بيظهر بـ "أفضل الفنيين" وبنجوم كاملة زوراً
-    idImage: idImage || null,
+    status: 'pending', rating: 0, 
     portfolioImages: portfolioImages || [],
   };
 
@@ -117,7 +128,6 @@ app.post('/api/workers', (req, res) => {
   res.status(201).json({ message: 'تم إرسال طلب الانضمام', worker: newWorker });
 });
 
-// PATCH /api/workers/:id/delay  — تسجيل تأخير على فني (خصم 1% لكل تأخير، فصل تلقائي بعد 3)
 app.patch('/api/workers/:id/delay', (req, res) => {
   const db = readDB();
   const idx = db.workers.findIndex(w => w.id === parseInt(req.params.id));
@@ -128,7 +138,6 @@ app.patch('/api/workers/:id/delay', (req, res) => {
 
   let autoRemoved = false;
   if (worker.delaysCount >= 3) {
-    // 3 تأخيرات = فصل تلقائي من المنصة
     db.workers.splice(idx, 1);
     autoRemoved = true;
   }
@@ -143,9 +152,8 @@ app.patch('/api/workers/:id/delay', (req, res) => {
   });
 });
 
-// PATCH /api/workers/:id/status  — قبول أو رفض أو إزالة فني
 app.patch('/api/workers/:id/status', (req, res) => {
-  const { status } = req.body; // 'approved' | 'rejected' | 'removed'
+  const { status } = req.body; 
   const db = readDB();
   const idx = db.workers.findIndex(w => w.id === parseInt(req.params.id));
   if (idx === -1) return res.status(404).json({ message: 'الفني غير موجود' });
@@ -161,7 +169,6 @@ app.patch('/api/workers/:id/status', (req, res) => {
   res.json({ message: `تم تحديث حالة الفني إلى ${status}`, worker: db.workers[idx] });
 });
 
-// PATCH /api/workers/:id/profile  — تعديل بيانات الفني (هاتف / عنوان)
 app.patch('/api/workers/:id/profile', (req, res) => {
   const db = readDB();
   const idx = db.workers.findIndex(w => w.id === parseInt(req.params.id));
@@ -176,7 +183,6 @@ app.patch('/api/workers/:id/profile', (req, res) => {
   res.json({ message: 'تم تحديث بياناتك', worker: safe });
 });
 
-// POST /api/workers/login  — دخول فني
 app.post('/api/workers/login', (req, res) => {
   const { email, password } = req.body;
   const worker = readDB().workers.find(w => w.email === email && w.password === password);
@@ -187,18 +193,13 @@ app.post('/api/workers/login', (req, res) => {
   res.json({ message: 'تم تسجيل الدخول', worker: safe });
 });
 
-// ════════════════════════════════════════════════════════════════
-// 4. CLIENTS
-// ════════════════════════════════════════════════════════════════
 
-// GET /api/clients
 app.get('/api/clients', (_req, res) => {
   const db = readDB();
   const clients = (db.clients || []).map(({ password: _p, ...c }) => c);
   res.json(clients);
 });
 
-// POST /api/clients  — تسجيل زبون جديد
 app.post('/api/clients', (req, res) => {
   const db = readDB();
   if (!db.clients) db.clients = [];
@@ -222,7 +223,6 @@ app.post('/api/clients', (req, res) => {
   res.status(201).json({ message: 'تم إنشاء الحساب', client: safe });
 });
 
-// PATCH /api/clients/:id/profile  — تعديل بيانات الزبون (هاتف / عنوان)
 app.patch('/api/clients/:id/profile', (req, res) => {
   const db = readDB();
   const idx = (db.clients || []).findIndex(c => c.id === parseInt(req.params.id));
@@ -237,7 +237,6 @@ app.patch('/api/clients/:id/profile', (req, res) => {
   res.json({ message: 'تم تحديث بياناتك', client: safe });
 });
 
-// POST /api/clients/login  — دخول زبون
 app.post('/api/clients/login', (req, res) => {
   const { email, password } = req.body;
   const db = readDB();
@@ -247,12 +246,8 @@ app.post('/api/clients/login', (req, res) => {
   res.json({ message: 'تم تسجيل الدخول', client: safe });
 });
 
-// ════════════════════════════════════════════════════════════════
-// 5. ADMIN AUTH  POST /api/admin/login
-// ════════════════════════════════════════════════════════════════
 app.post('/api/admin/login', (req, res) => {
   const { email, password } = req.body;
-  // 👈 تشخيص مباشر: هاد رح يطبع بالتيرمينال (مو بالمتصفح) بالضبط شو عم يوصل ويتقارن
   console.log('[ADMIN LOGIN ATTEMPT]');
   console.log('  المرسَل من الفورم   →', JSON.stringify(email), '/', JSON.stringify(password));
   console.log('  المتوقع بالسيرفر    →', JSON.stringify(ADMIN_EMAIL), '/', JSON.stringify(ADMIN_PASSWORD));
@@ -263,11 +258,7 @@ app.post('/api/admin/login', (req, res) => {
   res.status(401).json({ message: 'بيانات المسؤول غير صحيحة' });
 });
 
-// ════════════════════════════════════════════════════════════════
-// 6. PROJECTS
-// ════════════════════════════════════════════════════════════════
 
-// GET /api/projects  — مع فلتر اختياري بالزبون أو الفني
 app.get('/api/projects', (req, res) => {
   const db = readDB();
   let list = db.projects || [];
@@ -276,7 +267,6 @@ app.get('/api/projects', (req, res) => {
   res.json(list);
 });
 
-// POST /api/projects  — إضافة مشروع جديد
 app.post('/api/projects', (req, res) => {
   const db = readDB();
   if (!db.projects) db.projects = [];
@@ -289,11 +279,15 @@ app.post('/api/projects', (req, res) => {
     clientName, clientPhone: clientPhone || '',
     title, category, details,
     budget: Number(budget) || 50,
-    assignedWorker: 'بانتظار التعيين', assignedWorkerId: null,
-    statusStep: 1, isDelayed: false,
+    assignedWorker: req.body.assignedWorker || 'بانتظار التعيين',
+    assignedWorkerId: null,
+    workerChoice: req.body.workerChoice || 'platform',
+    statusStep: req.body.assignedWorker && req.body.assignedWorker !== 'بانتظار التعيين' ? 2 : 1,
+    isDelayed: false,
     createdAt: new Date().toISOString().split('T')[0],
     estimatedDays: Number(estimatedDays) || 2,
-    startedAt: null,
+    startedAt: req.body.assignedWorker && req.body.assignedWorker !== 'بانتظار التعيين'
+      ? new Date().toISOString().split('T')[0] : null,
   };
 
   db.projects.unshift(newProject);
@@ -301,7 +295,6 @@ app.post('/api/projects', (req, res) => {
   res.status(201).json({ message: 'تم إضافة المشروع', project: newProject });
 });
 
-// PATCH /api/projects/:id/assign  — تعيين فني على مشروع
 app.patch('/api/projects/:id/assign', (req, res) => {
   const { workerName } = req.body;
   const db = readDB();
@@ -315,51 +308,97 @@ app.patch('/api/projects/:id/assign', (req, res) => {
   res.json({ message: 'تم تعيين الفني', project: db.projects[idx] });
 });
 
-// PATCH /api/projects/:id/advance  — تقدم مرحلة
 app.patch('/api/projects/:id/advance', (req, res) => {
   const db = readDB();
   const idx = (db.projects || []).findIndex(p => p.id === parseInt(req.params.id));
   if (idx === -1) return res.status(404).json({ message: 'المشروع غير موجود' });
-  if (db.projects[idx].statusStep >= 4) return res.status(400).json({ message: 'المشروع مكتمل' });
+  
+  if (db.projects[idx].statusStep >= 5) return res.status(400).json({ message: 'المشروع مكتمل' });
 
   db.projects[idx].statusStep += 1;
   writeDB(db);
   res.json({ message: 'تم تقدم المرحلة', project: db.projects[idx] });
 });
 
-// ════════════════════════════════════════════════════════════════
-// 7. WARNINGS
-// ════════════════════════════════════════════════════════════════
-
-// GET /api/warnings
-app.get('/api/warnings', (_req, res) => {
+app.patch('/api/clients/:id/block', (req, res) => {
   const db = readDB();
-  res.json(db.warnings || []);
+  if (!db.clients) db.clients = [];
+  const idx = db.clients.findIndex(c => c.id === parseInt(req.params.id));
+  if (idx === -1) return res.status(404).json({ message: 'الزبون غير موجود' });
+
+  db.clients[idx].isBlocked = !db.clients[idx].isBlocked;
+  writeDB(db);
+  const { password: _p, ...safe } = db.clients[idx];
+  res.json({ message: db.clients[idx].isBlocked ? 'تم حظر الحساب' : 'تم إلغاء الحظر', client: safe });
+});
+app.delete('/api/clients/:id', (req, res) => {
+  const db = readDB();
+  const idx = (db.clients || []).findIndex(c => c.id === parseInt(req.params.id));
+  if (idx === -1) return res.status(404).json({ message: 'الزبون غير موجود' });
+  db.clients.splice(idx, 1);
+  writeDB(db);
+  res.json({ message: 'تم حذف الحساب' });
 });
 
-// POST /api/warnings  — إرسال تحذير
-app.post('/api/warnings', (req, res) => {
-  const { workerName, message } = req.body;
-  if (!workerName || !message) return res.status(400).json({ message: 'بيانات ناقصة' });
+app.patch('/api/projects/:id/cancel', (req, res) => {
+  const db = readDB();
+  const idx = (db.projects || []).findIndex(p => p.id === parseInt(req.params.id));
+  if (idx === -1) return res.status(404).json({ message: 'المشروع غير موجود' });
+
+  const { reason = '' } = req.body;
+  db.projects[idx].statusStep = 0;
+  db.projects[idx].cancelledAt = new Date().toISOString().split('T')[0];
+  db.projects[idx].cancelReason = reason;
+  writeDB(db);
+  res.json({ message: 'تم إلغاء المشروع', project: db.projects[idx] });
+});
+
+app.get('/api/reviews/:workerId', (req, res) => {
+  const db = readDB();
+  const workerId = parseInt(req.params.workerId);
+  const reviews = (db.reviews || []).filter(r => r.workerId === workerId);
+  res.json(reviews);
+});
+
+app.post('/api/reviews/:workerId', (req, res) => {
+  const workerId = parseInt(req.params.workerId);
+  const { clientName, clientEmail, stars, comment } = req.body;
+
+  if (!clientName || !stars) return res.status(400).json({ message: 'بيانات ناقصة' });
+  if (stars < 1 || stars > 5) return res.status(400).json({ message: 'التقييم يجب أن يكون بين 1 و5' });
 
   const db = readDB();
-  if (!db.warnings) db.warnings = [];
+  if (!db.reviews) db.reviews = [];
 
-  const warning = {
+  const already = db.reviews.find(r => r.workerId === workerId && r.clientEmail === clientEmail);
+  if (already) return res.status(409).json({ message: 'لقد قمت بتقييم هذا الفني مسبقاً' });
+
+  const review = {
     id: Date.now(),
-    workerName, message,
-    date: new Date().toLocaleTimeString('ar-EG'),
+    workerId,
+    clientName,
+    clientEmail: clientEmail || '',
+    stars: Number(stars),
+    comment: comment || '',
+    date: new Date().toLocaleDateString('ar-EG'),
   };
 
-  db.warnings.unshift(warning);
+  db.reviews.unshift(review);
+
+  const widx = db.workers.findIndex(w => w.id === workerId);
+  if (widx !== -1) {
+    const allWorkerReviews = db.reviews.filter(r => r.workerId === workerId);
+    const avg = allWorkerReviews.reduce((s, r) => s + r.stars, 0) / allWorkerReviews.length;
+    db.workers[widx].rating = parseFloat(avg.toFixed(1));
+    db.workers[widx].reviewsCount = allWorkerReviews.length;
+  }
+
   writeDB(db);
-  res.status(201).json({ message: 'تم إرسال التحذير', warning });
+  res.status(201).json({ message: 'تم إضافة التقييم', review });
 });
 
-// ════════════════════════════════════════════════════════════════
 app.listen(PORT, () => {
   console.log(`✅ API Server running → http://localhost:${PORT}`);
-  console.log('   Routes:');
   console.log('   GET  /api/categories');
   console.log('   GET  /api/site');
   console.log('   GET  /api/workers  ?search=&category=&status=&top=');
@@ -372,6 +411,7 @@ app.listen(PORT, () => {
   console.log('   GET  /api/clients');
   console.log('   POST /api/clients');
   console.log('   POST /api/clients/login');
+  console.log('   PATCH /api/clients/:id/profile');
   console.log('   POST /api/admin/login');
   console.log('   GET  /api/projects  ?clientName=&workerName=');
   console.log('   POST /api/projects');
@@ -379,4 +419,6 @@ app.listen(PORT, () => {
   console.log('   PATCH /api/projects/:id/advance');
   console.log('   GET  /api/warnings');
   console.log('   POST /api/warnings');
+  console.log('   GET  /api/reviews/:workerId');
+  console.log('   POST /api/reviews/:workerId');
 });
