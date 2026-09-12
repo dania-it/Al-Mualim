@@ -1,4 +1,3 @@
-// src/components/CategoryGrid.jsx
 
 export default function CategoryGrid({
   categories = [],

@@ -6,7 +6,7 @@ export default function SharedFields({
   control,
   errors,
   governorates,
-  showIdNumber = false,
+  showIdNumber = true,
 }) {
   return (
     <div className="flex flex-col gap-4">
@@ -25,7 +25,6 @@ export default function SharedFields({
       </FormField>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {/* رقم الهاتف */}
         <FormField
           label="رقم الهاتف"
           icon="fa-solid fa-phone"

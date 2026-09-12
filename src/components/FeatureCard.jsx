@@ -39,7 +39,6 @@ export default function FeatureCard({
         ${className}
       `}
     >
-      {/* رقم الخطوة (إن وجد) */}
       {number && (
         <span
           className="
@@ -66,7 +65,6 @@ export default function FeatureCard({
         </span>
       )}
 
-      {/* مربع الأيقونة المدوّر على اليمين */}
       <div
         className={`
           relative
@@ -92,7 +90,6 @@ export default function FeatureCard({
         <i className={icon}></i>
       </div>
 
-      {/* النصوص على اليسار بجانب الأيقونة */}
       <div className="relative z-10 flex-1 min-w-0">
         <h3
           className={`

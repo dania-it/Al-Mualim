@@ -9,7 +9,6 @@ export default function PendingWorkersTab({
 }) {
   const [toastMsg, setToastMsg] = useState(null);
 
-  // دالة جلب رابط الصورة
   const getImageUrl = (imgData) => {
     if (!imgData) return null;
     if (typeof imgData === "string") return imgData;
@@ -23,7 +22,6 @@ export default function PendingWorkersTab({
 
   return (
     <div className="space-y-4 sm:space-y-5 font-[var(--font-tajawal)]" dir="rtl">
-      {/* الهيدر العلوي */}
       <div className="flex flex-wrap justify-between items-center gap-2 pb-3 border-b border-[var(--border-color)]">
         <div>
           <h2 className="text-lg sm:text-xl font-black text-slate-800 flex items-center gap-2">
@@ -46,21 +44,21 @@ export default function PendingWorkersTab({
         />
       ) : (
         pendingWorkers.map((item) => {
-          const w = item.worker || item.user || item;
+const w = item.worker || item.user || item;
 
-          // الاسم
-          const workerName =
-            w.workerName || w.fullName || item.fullName || "فني جديد";
+// دعم ظهور الاسم سواء تم إرساله كـ fullName أو workerName
+const workerName =
+  item.fullName || w.fullName || item.workerName || w.workerName || "فني جديد";
 
-          // رقم الهوية
-          const nationalId =
-            w.idNumber ||
-            item.idNumber ||
-            w.nationalId ||
-            item.nationalId ||
-            `010${Math.floor(10000000 + Math.random() * 90000000)}`;
+// جلب حقل idNumber الصادر من حقل الإدخال لصفحة التسجيل وتثبيته
+const nationalId =
+  item.idNumber ||
+  w.idNumber ||
+  item.nationalId ||
+  w.nationalId ||
+  "غير مسجل";
 
-          // السكن
+
           const gov = w.governorate || item.governorate;
           const det =
             w.detailedAddress ||
@@ -73,7 +71,6 @@ export default function PendingWorkersTab({
               ? addressParts.join(" - ")
               : w.description || "غير محدد";
 
-          // التواصل والصور
           const phone = w.phone || item.phone || "";
           const cleanPhone = phone ? String(phone).replace(/[^0-9]/g, "") : "";
           const avatarUrl = getImageUrl(
@@ -88,7 +85,6 @@ export default function PendingWorkersTab({
               key={item.id || w.id}
               className="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-sm transition-all space-y-4"
             >
-              {/* معلومات الجزء العلوي للبطاقة */}
               <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
                 <div className="flex items-center gap-3">
                   {avatarUrl ? (
@@ -119,7 +115,6 @@ export default function PendingWorkersTab({
                   </div>
                 </div>
 
-                {/* أزرار التواصل السريع */}
                 <div className="flex items-center gap-1.5 bg-slate-50 p-1 rounded-xl border border-slate-100">
                   <span className="text-[10px] font-bold text-slate-400 px-1.5">
                     تواصل:
@@ -147,7 +142,6 @@ export default function PendingWorkersTab({
                 </div>
               </div>
 
-              {/* شبكة البيانات الأساسية */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
                 <div className="bg-slate-50/70 p-2.5 sm:p-3 rounded-xl border border-slate-100">
                   <span className="text-[10px] font-bold text-slate-400 block mb-0.5">
@@ -183,7 +177,6 @@ export default function PendingWorkersTab({
                 </div>
               </div>
 
-              {/* معاينة صورة الهوية إذا وُجدت */}
               {idImageUrl && (
                 <div className="bg-slate-50/70 p-2.5 rounded-xl border border-slate-100 flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
@@ -200,7 +193,6 @@ export default function PendingWorkersTab({
                 </div>
               )}
 
-              {/* أزرار اتخاذ القرار */}
               <div className="pt-2 flex items-center justify-end gap-2 sm:gap-3 border-t border-slate-100">
                 <button
                   type="button"

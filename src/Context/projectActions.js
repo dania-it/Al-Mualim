@@ -1,15 +1,9 @@
-// src/Context/projectActions.js
-
 import {
   createProject,
   assignWorker,
   advanceProject,
   cancelProject,
 } from "../api/index";
-
-// =======================================================
-// Add Project
-// =======================================================
 
 export const addProject = async (
   projectData,
@@ -27,11 +21,6 @@ export const addProject = async (
 
   return data.project;
 };
-
-// =======================================================
-// Assign Worker
-// =======================================================
-
 export const assignWorkerToProject =
   async (
     id,
@@ -55,10 +44,6 @@ export const assignWorkerToProject =
 
     return data.project;
   };
-
-// =======================================================
-// Advance Project
-// =======================================================
 
 export const advanceProjectStep =
   async (
@@ -113,10 +98,6 @@ export const advanceProjectStep =
       return null;
     }
   };
-
-// =======================================================
-// Cancel Project
-// =======================================================
 
 export const cancelProjectFn =
   async (

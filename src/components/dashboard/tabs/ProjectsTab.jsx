@@ -18,33 +18,20 @@ export default function ProjectsTab({
 }) {
   const [filter, setFilter] = useState("all");
 
-  // ==========================================================
-  // بانتظار الفني
-  // ==========================================================
   const isWaitingForWorker = (project) => {
     return (
       !project.assignedWorker || project.assignedWorker === "بانتظار التعيين"
     );
   };
 
-  // ==========================================================
-  // مكتمل
-  // ==========================================================
   const isCompleted = (project) => {
     return Number(project.statusStep) >= 5 || project.status === "منجزة";
   };
-
-  // ==========================================================
-  // جاري
-  // ==========================================================
   const isActive = (project) => {
     const step = Number(project.statusStep) || 0;
     return !isWaitingForWorker(project) && step >= 1 && step < 5;
   };
 
-  // ==========================================================
-  // الإحصائيات
-  // ==========================================================
   const counts = {
     all: projectsList.length,
     pending: projectsList.filter(isWaitingForWorker).length,
@@ -52,9 +39,6 @@ export default function ProjectsTab({
     completed: projectsList.filter(isCompleted).length,
   };
 
-  // ==========================================================
-  // الفلترة
-  // ==========================================================
   const filtered = projectsList.filter((project) => {
     if (filter === "pending") return isWaitingForWorker(project);
     if (filter === "active") return isActive(project);
@@ -64,7 +48,6 @@ export default function ProjectsTab({
 
   return (
     <div className="space-y-4 sm:space-y-5 font-[var(--font-tajawal)]" dir="rtl">
-      {/* العنونة العليا */}
       <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[var(--border-color)]">
         <div>
           <h2 className="text-lg sm:text-xl font-black text-[var(--text-dark)] flex items-center gap-2">
@@ -82,7 +65,6 @@ export default function ProjectsTab({
         </span>
       </div>
 
-      {/* أزرار الفلترة */}
       <div className="flex flex-wrap gap-1.5 sm:gap-2">
         {FILTER_TABS.map(({ key, label }) => (
           <button
@@ -110,7 +92,6 @@ export default function ProjectsTab({
         ))}
       </div>
 
-      {/* قائمة الكروت */}
       {filtered.length === 0 ? (
         <EmptyState msg="لا توجد مشاريع" icon="fa-solid fa-list-check" />
       ) : (

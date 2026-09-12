@@ -6,7 +6,7 @@ const CAT_CONFIG = {
   'طيان': { color: 'text-cyan-500', bgColor: 'bg-cyan-500/10', icon: 'fa-solid fa-faucet-drip', barColor: 'bg-cyan-500' },
   'دهان': { color: 'text-violet-500', bgColor: 'bg-violet-500/10', icon: 'fa-solid fa-paint-roller', barColor: 'bg-violet-500' },
   'صيانة': { color: 'text-red-500', bgColor: 'bg-red-500/10', icon: 'fa-solid fa-screwdriver-wrench', barColor: 'bg-red-500' },
-  'نجارة': { color: 'text-stone-500', bgColor: 'bg-stone-500/10', icon: 'fa-solid fa-tree', barColor: 'bg-stone-500' },
+  'نجار': { color: 'text-stone-500', bgColor: 'bg-stone-500/10', icon: 'fa-solid fa-tree', barColor: 'bg-stone-500' },
   'بلاط': { color: 'text-sky-500', bgColor: 'bg-sky-500/10', icon: 'fa-solid fa-border-top-left', barColor: 'bg-sky-500' },
 };
 

@@ -8,12 +8,8 @@ import { dirname, join } from 'path';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DB_PATH = join(__dirname, '../src/data/jobs.json');
 
-// 👈 لازم نحدد المسار بالضبط جنب api.js، وإلا dotenv بيدوّر بمجلد التشغيل (cwd)
-// يلي ممكن يكون مختلف عن مكان الملف نفسه → القيم بتطلع undefined وتسجيل دخول الأدمن يفشل
 dotenv.config({ path: join(__dirname, '.env') });
 
-// 👈 قيم احتياطية (fallback) — لو .env ما انقرا لأي سبب، تسجيل دخول الأدمن بيضل شغال
-// بالقيم الافتراضية، وبنفس الوقت أي قيمة موجودة فعلياً بـ .env بتاخد الأولوية دايماً
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@platform.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '123456';
 
@@ -27,33 +23,21 @@ const app = express();
 const PORT = 5000;
 
 app.use(cors());
-app.use(express.json({ limit: '15mb' })); // 👈 كانت 100kb افتراضياً - صور الهوية والأعمال بصيغة base64 بتتجاوزها بسهولة → 413
-
-// ── helper: قراءة وكتابة الـ DB ──────────────────────────────────
+app.use(express.json({ limit: '15mb' })); 
 const readDB = () => JSON.parse(readFileSync(DB_PATH, 'utf-8'));
 const writeDB = (data) => writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf-8');
 
-// ════════════════════════════════════════════════════════════════
-// 1. CATEGORIES  GET /api/categories
-// ════════════════════════════════════════════════════════════════
+
 app.get('/api/categories', (_req, res) => {
   const { categories } = readDB();
   res.json(categories);
 });
 
-// ════════════════════════════════════════════════════════════════
-// 2. SITE META  GET /api/site  (stats, features, quickSearchTags)
-// ════════════════════════════════════════════════════════════════
 app.get('/api/site', (_req, res) => {
   const { stats, features, quickSearchTags } = readDB();
   res.json({ stats, features, quickSearchTags });
 });
 
-// ════════════════════════════════════════════════════════════════
-// 3. WORKERS
-// ════════════════════════════════════════════════════════════════
-
-// GET /api/workers  — جلب كل الفنيين مع بحث وفلترة واختياري top N
 app.get('/api/workers', (req, res) => {
   const { search = '', category = 'الكل', status, top } = req.query;
   let list = readDB().workers;
@@ -104,7 +88,7 @@ app.get('/api/workers/:id', (req, res) => {
 
 app.post('/api/workers', (req, res) => {
   const db = readDB();
-  const { fullName, category, residence, detailedAddress, phone, email, password, idImage, portfolioImages } = req.body;
+  const { fullName, category, residence, detailedAddress, phone, email, password, idImage, portfolioImages, idNumber } = req.body;
 
   if (!fullName || !email || !password || !category)
     return res.status(400).json({ message: 'بيانات ناقصة' });
@@ -119,6 +103,7 @@ app.post('/api/workers', (req, res) => {
     category, price: 35,
     workerName: fullName, email, password,
     phone, residence, detailedAddress: detailedAddress || '',
+    idNumber: idNumber || '', 
     status: 'pending', rating: 0, 
     portfolioImages: portfolioImages || [],
   };

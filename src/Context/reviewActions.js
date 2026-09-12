@@ -1,13 +1,7 @@
-// src/Context/reviewActions.js
-
 import {
   getReviews,
   postReview,
 } from "../api/index";
-
-// =======================================================
-// Fetch Reviews
-// =======================================================
 
 export const fetchReviews = async (
   workerId,
@@ -33,11 +27,6 @@ export const fetchReviews = async (
     );
   }
 };
-
-// =======================================================
-// Add Review
-// =======================================================
-
 export const addReview = async (
   workerId,
   reviewData,
@@ -104,11 +93,6 @@ export const addReview = async (
 
   return newReview;
 };
-
-// =======================================================
-// Review Stats
-// =======================================================
-
 export const getReviewStats = (
   workerId,
   fallbackWorker,

@@ -93,7 +93,6 @@ export default function ProjectTimeline({
         </div>
       )}
 
-      {/* شريط المراحل التفاعلي */}
       <div className="overflow-x-auto pb-2 -mx-2 px-2 sm:mx-0 sm:px-0">
         <div className="flex items-start justify-between min-w-[320px] sm:min-w-full gap-1">
           {STEPS.map((item, index) => {
@@ -146,7 +145,6 @@ export default function ProjectTimeline({
         </div>
       </div>
 
-      {/* تفاصيل التاريخ والأزرار */}
       <div className="flex flex-wrap items-center justify-between gap-2.5 text-xs sm:text-sm pt-1">
         <div>
           {estEnd && (

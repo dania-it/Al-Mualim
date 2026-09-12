@@ -1,4 +1,3 @@
-// src/Context/authActions.js
 
 import {
   loginWorkerAPI,
@@ -9,10 +8,6 @@ import {
   updateWorkerProfile,
   updateClientProfile,
 } from "../api/index";
-
-// =======================================================
-// Login Worker
-// =======================================================
 
 export const loginWorker = async (
   email,
@@ -45,10 +40,6 @@ export const loginWorker = async (
   }
 };
 
-// =======================================================
-// Login Client
-// =======================================================
-
 export const loginClient = async (
   email,
   password,
@@ -79,10 +70,6 @@ export const loginClient = async (
     };
   }
 };
-
-// =======================================================
-// Login Admin
-// =======================================================
 
 export const loginAdminFn = async (
   email,
@@ -115,9 +102,6 @@ export const loginAdminFn = async (
   }
 };
 
-// =======================================================
-// Register Worker
-// =======================================================
 
 export const addWorker = async (
   workerData,
@@ -137,9 +121,6 @@ export const addWorker = async (
   return newWorker;
 };
 
-// =======================================================
-// Register Client
-// =======================================================
 
 export const addClient = async (
   clientData,
@@ -156,11 +137,6 @@ export const addClient = async (
 
   return data.client;
 };
-
-// =======================================================
-// Update Profile
-// =======================================================
-
 export const updateProfile = async (
   user,
   body,
@@ -172,11 +148,6 @@ export const updateProfile = async (
       "يجب تسجيل الدخول"
     );
   }
-
-  // ---------------------------------------------------
-  // Worker
-  // ---------------------------------------------------
-
   if (user.role === "worker") {
     const data =
       await updateWorkerProfile(
@@ -207,10 +178,6 @@ export const updateProfile = async (
 
     return data;
   }
-
-  // ---------------------------------------------------
-  // Client
-  // ---------------------------------------------------
 
   if (user.role === "client") {
     const data =

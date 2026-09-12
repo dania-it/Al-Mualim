@@ -1,4 +1,3 @@
-// src/components/job/SearchFilter.jsx
 
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -52,13 +51,11 @@ export default function SearchFilter({
 }) {
   const [showFilters, setShowFilters] = useState(false);
 
-  // القيم المؤقتة داخل المودال
   const [tempCategory, setTempCategory] = useState(selectedCategory);
   const [tempRating, setTempRating] = useState(selectedRating);
   const [tempPrice, setTempPrice] = useState(selectedPrice);
   const [tempLocation, setTempLocation] = useState(selectedLocation);
 
-  // عند فتح المودال نحدث القيم لتطابق المحفوظ حالياً
   useEffect(() => {
     if (showFilters) {
       setTempCategory(selectedCategory || 'الكل');
@@ -74,7 +71,6 @@ export default function SearchFilter({
     selectedLocation,
   ]);
 
-  // منع السكرول الرئيسي للبدن أثناء فتح المودال
   useEffect(() => {
     if (showFilters) {
       document.body.style.overflow = 'hidden';
@@ -102,9 +98,6 @@ export default function SearchFilter({
     selectedPrice !== 'all' ||
     selectedLocation !== 'all';
 
-  // =====================================================
-  // تطبيق الفلاتر بدون إغلاق المودال
-  // =====================================================
   const applyFilters = () => {
     if (setSelectedCategory) setSelectedCategory(tempCategory);
     if (setSelectedRating) setSelectedRating(tempRating);
@@ -112,17 +105,12 @@ export default function SearchFilter({
     if (setSelectedLocation) setSelectedLocation(tempLocation);
   };
 
-  // =====================================================
-  // مسح جميع الفلاتر
-  // =====================================================
   const clearFilters = () => {
-    // إعادة تعيين الحالات الخارجية
     if (setSelectedCategory) setSelectedCategory('الكل');
     if (setSelectedRating) setSelectedRating('all');
     if (setSelectedPrice) setSelectedPrice('all');
     if (setSelectedLocation) setSelectedLocation('all');
 
-    // إعادة تعيين الحالات الداخلية للمودال
     setTempCategory('الكل');
     setTempRating('all');
     setTempPrice('all');
@@ -176,7 +164,7 @@ export default function SearchFilter({
           duration-200
         "
       >
-        {/* HEADER */}
+      
         <div
           className="
             shrink-0
@@ -243,7 +231,6 @@ export default function SearchFilter({
           </div>
         </div>
 
-        {/* BODY */}
         <div
           className="
             flex-1
@@ -254,7 +241,6 @@ export default function SearchFilter({
             rounded-b-[28px]
           "
         >
-          {/* التخصص */}
           <div>
             <label className="flex items-center gap-2 text-sm font-black text-[#080d28] mb-2.5">
               <i className="fa-solid fa-toolbox text-[#263174] text-base" />
@@ -268,7 +254,6 @@ export default function SearchFilter({
             />
           </div>
 
-          {/* المكان */}
           <div>
             <label className="flex items-center gap-2 text-sm font-black text-[#080d28] mb-2.5">
               <i className="fa-solid fa-location-dot text-[#263174] text-base" />
@@ -282,7 +267,6 @@ export default function SearchFilter({
             />
           </div>
 
-          {/* التقييم */}
           <div>
             <label className="flex items-center gap-2 text-sm font-black text-[#080d28] mb-2.5">
               <i className="fa-solid fa-star text-[#263174] text-base" />
@@ -296,7 +280,6 @@ export default function SearchFilter({
             />
           </div>
 
-          {/* السعر */}
           <div>
             <label className="flex items-center gap-2 text-sm font-black text-[#080d28] mb-2.5">
               <i className="fa-solid fa-sack-dollar text-[#263174] text-base" />
@@ -310,7 +293,6 @@ export default function SearchFilter({
             />
           </div>
 
-          {/* الأزرار */}
           <div className="pt-2 flex gap-3 shrink-0">
             <button
               type="button"

@@ -1,4 +1,3 @@
-// src/components/Header.jsx
 
 export default function Header({ title, subtitle, logo }) {
   return (
@@ -8,7 +7,6 @@ export default function Header({ title, subtitle, logo }) {
     >
       <div className="max-w-4xl mx-auto flex flex-col items-center gap-3">
         
-        {/* الشعار */}
         {logo && (
           <img 
             src={logo} 
@@ -17,12 +15,10 @@ export default function Header({ title, subtitle, logo }) {
           />
         )}
 
-        {/* العنوان الرئيسي */}
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight tracking-tight">
           {title}
         </h1>
         
-        {/* العنوان الفرعي */}
         {subtitle && (
           <p className="text-white/80 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-medium">
             {subtitle}

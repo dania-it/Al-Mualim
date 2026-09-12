@@ -3,7 +3,7 @@ import { useApp } from "../../../Context/AppContext";
 import ProjectCard from "../ProjectCard";
 import { Field, EmptyState } from "../DashboardHelpers";
 
-const CATEGORIES = ["كهرباء", "طيان", "دهان", "صيانة", "نجارة", "بلاط"];
+const CATEGORIES = ["كهرباء", "طيان", "دهان", "صيانة", "نجار", "بلاط"];
 
 export function MyRequestsTab({ projectsList = [], user }) {
   const myProjects = projectsList.filter((project) => {

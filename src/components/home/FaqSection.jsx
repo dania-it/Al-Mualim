@@ -38,8 +38,7 @@ export default function FaqSection() {
     <section className="py-16 sm:py-20 lg:py-24 font-tajawal relative overflow-hidden" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
-        {/* هيدر القسم */}
-        <Reveal delay={100}>
+                <Reveal delay={100}>
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#080d28] leading-tight">
               لديك استفسار؟ <span className="text-[#263174]">انظر هنا.</span>

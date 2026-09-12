@@ -1,13 +1,8 @@
-// src/Context/workerActions.js
 
 import {
   updateWorkerStatus,
   markWorkerDelay,
 } from "../api/index";
-
-// =======================================================
-// Approve Worker
-// =======================================================
 
 export const approveWorker = async (
   id,
@@ -38,10 +33,6 @@ export const approveWorker = async (
   );
 };
 
-// =======================================================
-// Reject Worker
-// =======================================================
-
 export const rejectWorker = async (
   id,
   setJobsList
@@ -67,9 +58,6 @@ export const rejectWorker = async (
   );
 };
 
-// =======================================================
-// Change Worker Status
-// =======================================================
 
 export const changeWorkerStatus = async (
   id,
@@ -104,10 +92,6 @@ export const changeWorkerStatus = async (
   return data;
 };
 
-// =======================================================
-// Remove Worker
-// =======================================================
-
 export const removeWorker = async (
   id,
   setJobsList
@@ -132,10 +116,6 @@ export const removeWorker = async (
     )
   );
 };
-
-// =======================================================
-// Delay Worker
-// =======================================================
 
 export const markDelay = async (
   id,
@@ -174,9 +154,6 @@ export const markDelay = async (
     const returnedWorker =
       data?.worker;
 
-    // ---------------------------------------------------
-    // إذا السيرفر قرر إزالة الفني
-    // ---------------------------------------------------
 
     if (
       data &&
@@ -192,11 +169,6 @@ export const markDelay = async (
 
       return data;
     }
-
-    // ---------------------------------------------------
-    // تحديث الفني بعد التأخير
-    // ---------------------------------------------------
-
     setJobsList((prev) =>
       prev.map((worker) => {
         if (
@@ -206,7 +178,6 @@ export const markDelay = async (
           return worker;
         }
 
-        // السيرفر أعاد الفني
         if (returnedWorker) {
           return {
             ...worker,
@@ -214,7 +185,6 @@ export const markDelay = async (
           };
         }
 
-        // السيرفر لم يعد worker
         const currentDelays =
           Number(
             worker.delaysCount ??
@@ -239,10 +209,6 @@ export const markDelay = async (
       "API mark delay error:",
       error
     );
-
-    // ---------------------------------------------------
-    // Fallback
-    // ---------------------------------------------------
 
     setJobsList((prev) =>
       prev

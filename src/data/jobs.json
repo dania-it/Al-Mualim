@@ -86,6 +86,39 @@
   ],
   "workers": [
     {
+      "id": 1789069203174,
+      "title": "خدمات - نجار",
+      "description": "فني بمجال نجار في .",
+      "category": "نجار",
+      "price": 35,
+      "workerName": "محمد رامي ساني",
+      "email": "mohamed@go.com",
+      "password": "123562@",
+      "phone": "0952526553",
+      "detailedAddress": "دوما دوار البلدية",
+      "idNumber": "01099988877",
+      "status": "approved",
+      "rating": 0,
+      "portfolioImages": []
+    },
+    {
+      "id": 1788084588020,
+      "title": "خدمات - دهان",
+      "description": "فني بمجال دهان في .",
+      "category": "دهان",
+      "price": 35,
+      "workerName": "مازن سعد الدين",
+      "email": "mazen@gm.com",
+      "password": "123456@",
+      "phone": "0921566665",
+      "detailedAddress": "برزة البلد",
+      "status": "approved",
+      "rating": 0,
+      "portfolioImages": [],
+      "delaysCount": 1,
+      "idNumber": "01043456789"
+    },
+    {
       "id": 1787985985161,
       "title": "خدمات - نجار",
       "description": "فني بمجال نجار في .",
@@ -101,7 +134,8 @@
       "idImage": {
         "0": {}
       },
-      "portfolioImages": []
+      "portfolioImages": [],
+      "idNumber": "01023459789"
     },
     {
       "id": 1787981273982,
@@ -113,13 +147,14 @@
       "email": "rami@gmail.com",
       "password": "123456@",
       "phone": "0998876326",
-      "detailedAddress": "ساحة المحافظة",
+      "detailedAddress": "ساحة المحافظة.3",
       "status": "approved",
       "rating": 0,
       "idImage": {
         "0": {}
       },
-      "portfolioImages": []
+      "portfolioImages": [],
+      "idNumber": "01023456789"
     },
     {
       "id": 1787957144938,
@@ -138,7 +173,8 @@
         "0": {}
       },
       "portfolioImages": [],
-      "reviewsCount": 1
+      "reviewsCount": 1,
+      "idNumber": "01023456789"
     },
     {
       "id": 1787824335078,
@@ -156,7 +192,8 @@
       "idImage": {
         "0": {}
       },
-      "portfolioImages": []
+      "portfolioImages": [],
+      "idNumber": "01023456789"
     },
     {
       "id": 1786368119373,
@@ -171,7 +208,8 @@
       "residence": "ريف دمشق",
       "detailedAddress": "الحمرا",
       "status": "approved",
-      "rating": 0
+      "rating": 0,
+      "idNumber": "01023456789"
     },
     {
       "id": 5,
@@ -186,7 +224,8 @@
       "reviewsCount": 1,
       "price": 150,
       "description": "تركيب وتصليح الأبواب، الخزائن، والمطابخ الخشبية بدقة عالية.",
-      "delaysCount": 1
+      "delaysCount": 1,
+      "idNumber": "01023446789"
     },
     {
       "id": 6,
@@ -201,7 +240,8 @@
       "reviewsCount": 0,
       "price": 80,
       "description": "تصنيع وتركيب أبواب ونوافذ ألمنيوم وزجاج سيكوريت مع ضمان العزل.",
-      "delaysCount": 1
+      "delaysCount": 1,
+      "idNumber": "01023456789"
     },
     {
       "id": 7,
@@ -215,7 +255,8 @@
       "rating": 0,
       "reviewsCount": 0,
       "price": 45,
-      "description": "تشخيص وصيانة الأعطال الإلكترونية والميكانيكية للثلاجات والغسالات."
+      "description": "تشخيص وصيانة الأعطال الإلكترونية والميكانيكية للثلاجات والغسالات.",
+      "idNumber": "01023477789"
     },
     {
       "id": 8,
@@ -229,7 +270,8 @@
       "rating": 0,
       "reviewsCount": 0,
       "price": 110,
-      "description": "لحام وتشكيل وتفصيل أبواب ومظلات وشبكات الحماية الحديدية."
+      "description": "لحام وتشكيل وتفصيل أبواب ومظلات وشبكات الحماية الحديدية.",
+      "idNumber": "01023456789"
     },
     {
       "id": 9,
@@ -243,7 +285,8 @@
       "rating": 0,
       "reviewsCount": 0,
       "price": 130,
-      "description": "تركيب البلاط والسيراميك والرخام للمطابخ والحمامات والأرضيات بمهارة."
+      "description": "تركيب البلاط والسيراميك والرخام للمطابخ والحمامات والأرضيات بمهارة.",
+      "idNumber": "01023455589"
     },
     {
       "id": 10,
@@ -257,7 +300,8 @@
       "rating": 0,
       "reviewsCount": 0,
       "price": 90,
-      "description": "تركيب كاميرات المراقبة وتوصيلها بالهاتف وتجهيز أجهزة الإنذار."
+      "description": "تركيب كاميرات المراقبة وتوصيلها بالهاتف وتجهيز أجهزة الإنذار.",
+      "idNumber": "01023457789"
     },
     {
       "id": 11,
@@ -273,8 +317,11 @@
       "price": 75,
       "description": "قص الأشجار، شبكات الري الحديثة، وزراعة الشتلات والنجيل الطبيعي.",
       "workerAvatar": "/src/assets/man.png",
-      "portfolioImages": ["/src/assets/agro1.jpg",
-    "/src/assets/agro2.jpg"]
+      "portfolioImages": [
+        "/src/assets/agro1.jpg",
+        "/src/assets/agro2.jpg"
+      ],
+      "idNumber": "01023459789"
     },
     {
       "id": 12,
@@ -289,7 +336,10 @@
       "reviewsCount": 0,
       "price": 70,
       "description": "تنظيف السجاد، الكنب، الستائر، وتعقيم المطابخ والحمامات بأحدث الأجهزة.",
-      "workerAvatar":["/src/assets/man3.png"]
+      "workerAvatar": [
+        "/src/assets/man3.png"
+      ],
+      "idNumber": "01023458889"
     },
     {
       "id": 13,
@@ -304,7 +354,8 @@
       "reviewsCount": 0,
       "price": 140,
       "description": "تنفيذ أعمال الجبس بورد، الإضاءة المخفية، والديكورات الجدارية الحديثة.",
-      "delaysCount": 1
+      "delaysCount": 1,
+      "idNumber": "01023456999"
     },
     {
       "id": 14,
@@ -318,7 +369,8 @@
       "rating": 0,
       "reviewsCount": 0,
       "price": 100,
-      "description": "فك وتغليف ونقل الأثاث مع الترتيب والتركيب في المكان الجديد بأمان."
+      "description": "فك وتغليف ونقل الأثاث مع الترتيب والتركيب في المكان الجديد بأمان.",
+      "idNumber": "01033456789"
     },
     {
       "id": 15,
@@ -332,7 +384,8 @@
       "rating": 0,
       "reviewsCount": 0,
       "price": 200,
-      "description": "تركيب الألواح الشمسية، المحولات (Inverters)، والبطاريات وصيانتها."
+      "description": "تركيب الألواح الشمسية، المحولات (Inverters)، والبطاريات وصيانتها.",
+      "idNumber": "01023456789"
     },
     {
       "id": 17,
@@ -346,7 +399,8 @@
       "rating": 0,
       "reviewsCount": 0,
       "price": 55,
-      "description": "تأسيس وصيانة التمديدات الكهربائية واكتشاف الأعطال وتركيب الأجهزة الذكية."
+      "description": "تأسيس وصيانة التمديدات الكهربائية واكتشاف الأعطال وتركيب الأجهزة الذكية.",
+      "idNumber": "01023459999"
     }
   ],
   "clients": [
@@ -360,7 +414,7 @@
       "governorate": "دمشق",
       "detailedAddress": "ساحة المرجة.",
       "registeredAt": "٢٩‏/٨‏/٢٠٢٦",
-      "isBlocked": false
+      "isBlocked": true
     },
     {
       "id": 1787751410399,
@@ -469,6 +523,57 @@
   ],
   "projects": [
     {
+      "id": 1788095543039,
+      "clientName": "راما محمد باشا",
+      "clientPhone": "0998874622",
+      "title": "تصميم وتفصيل مطابخ وأثاث خشبي",
+      "category": "نجار",
+      "details": "[صيانة جديدة] - طلب مباشر للفني عمر النجار",
+      "budget": 150,
+      "assignedWorker": "عمر النجار",
+      "assignedWorkerId": null,
+      "workerChoice": "self",
+      "statusStep": 5,
+      "isDelayed": false,
+      "createdAt": "2026-08-30",
+      "estimatedDays": 1,
+      "startedAt": "2026-08-30"
+    },
+    {
+      "id": 1788084134230,
+      "clientName": "راما محمد باشا",
+      "clientPhone": "0998874622",
+      "title": "نقل وتغليف أثاث ومفروشات",
+      "category": "صيانة",
+      "details": "[صيانة جديدة] - طلب مباشر للفني ماهر الكردي",
+      "budget": 100,
+      "assignedWorker": "ماهر الكردي",
+      "assignedWorkerId": null,
+      "workerChoice": "self",
+      "statusStep": 5,
+      "isDelayed": false,
+      "createdAt": "2026-08-30",
+      "estimatedDays": 1,
+      "startedAt": "2026-08-30"
+    },
+    {
+      "id": 1788084062364,
+      "clientName": "راما محمد باشا",
+      "clientPhone": "0998874622",
+      "title": "تصميم وتفصيل مطابخ وأثاث خشبي",
+      "category": "نجار",
+      "details": "[صيانة جديدة] - طلب موجه عبر المنصة",
+      "budget": 150,
+      "assignedWorker": "عمر النجار",
+      "assignedWorkerId": null,
+      "workerChoice": "platform",
+      "statusStep": 5,
+      "isDelayed": false,
+      "createdAt": "2026-08-30",
+      "estimatedDays": 1,
+      "startedAt": "2026-08-30"
+    },
+    {
       "id": 1787988661127,
       "clientName": "مدير المنصة",
       "clientPhone": "",
@@ -479,7 +584,7 @@
       "assignedWorker": "فراس البستاني",
       "assignedWorkerId": null,
       "workerChoice": "self",
-      "statusStep": 2,
+      "statusStep": 5,
       "isDelayed": false,
       "createdAt": "2026-08-29",
       "estimatedDays": 1,
@@ -496,7 +601,7 @@
       "assignedWorker": "حمزة الراوي",
       "assignedWorkerId": null,
       "workerChoice": "self",
-      "statusStep": 3,
+      "statusStep": 5,
       "isDelayed": false,
       "createdAt": "2026-08-29",
       "estimatedDays": 1,

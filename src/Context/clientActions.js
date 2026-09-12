@@ -1,12 +1,6 @@
-// src/Context/clientActions.js
-
 import {
   toggleBlockClientAPI,
 } from "../api/index";
-
-// =======================================================
-// Block / Unblock Client
-// =======================================================
 
 export const toggleBlockClient = async (
   id,

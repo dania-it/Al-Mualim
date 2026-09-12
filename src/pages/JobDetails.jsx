@@ -33,12 +33,10 @@ export default function JobDetails() {
   const [showContact, setShowContact] = useState(false);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
 
-  // إدارة المؤقت (5 دقائق = 300 ثانية)
   const [timeLeft, setTimeLeft] = useState(0);
 
   const isAdmin = user?.role === "admin" || user?.isAdmin === true;
 
-  // التحقق من الوقت المتبقي للمؤقت عند تحميل الصفحة
   useEffect(() => {
     const cooldownKey = `last_order_time_${id}`;
     const lastOrderTime = localStorage.getItem(cooldownKey);
@@ -226,7 +224,15 @@ export default function JobDetails() {
             </Reveal>
             <Reveal delay={150}>
               <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-                <WorkerLocation residence={job.residence} serviceAreas={job.serviceAreas || [job.residence, "المناطق المجاورة"]} />
+                <WorkerLocation
+                  residence={job.residence || job.detailedAddress || job.governorate}
+                  serviceAreas={
+                    job.serviceAreas || [
+                      job.residence || job.detailedAddress || job.governorate,
+                      "المناطق المجاورة",
+                    ]
+                  }
+                />
               </div>
             </Reveal>
             <Reveal delay={180}>

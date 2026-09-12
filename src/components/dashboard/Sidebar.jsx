@@ -54,7 +54,6 @@ export default function Sidebar({
 
   return (
     <>
-      {/* شريط الموبايل العلوي مع زر الـ 3 شخطات */}
       <div className="md:hidden flex items-center justify-between bg-[var(--primary)] text-white px-4 py-3 sticky top-0 z-30 shadow-md font-[var(--font-tajawal)]">
         <div className="flex items-center gap-2 font-black text-base">
           <i className="fa-solid fa-screwdriver-wrench"></i>
@@ -71,7 +70,6 @@ export default function Sidebar({
         </button>
       </div>
 
-      {/* الخلفية المعتمة عند فتح القائمة على الموبايل */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
@@ -79,7 +77,6 @@ export default function Sidebar({
         />
       )}
 
-      {/* القائمة الجانبية */}
       <aside
         className={`
           fixed md:sticky top-0 right-0 z-50
@@ -93,13 +90,11 @@ export default function Sidebar({
           ${isOpen ? "translate-x-0" : "translate-x-full md:translate-x-0"}
         `}
       >
-        {/* عنوان المنصة للشاشات الكبيرة */}
         <div className="hidden md:flex items-center gap-2 text-white font-black text-lg sm:text-xl mb-8 px-2 tracking-wide">
           <i className="fa-solid fa-screwdriver-wrench text-base sm:text-lg"></i>
           <span>المنصة</span>
         </div>
 
-        {/* قائمة التبويبات */}
         <div className="flex-1 space-y-1">
           {Array.isArray(nav) &&
             nav.map((item) => {
@@ -145,7 +140,6 @@ export default function Sidebar({
             })}
         </div>
 
-        {/* الجزء السفلي: تفاصيل المستخدم والروابط */}
         <div className="mt-auto pt-5 border-t border-white/20">
           <div className="flex items-center gap-2.5 px-2 mb-3">
             <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-xs shrink-0">

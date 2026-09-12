@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useApp } from "../../Context/AppContext";
 import HighlightedText from "../search/HighlightedText";
+import { normalizeArabicText } from "../search/useInstantSearch";
 import localData from "../../data/jobs.json";
 
 export default function WorkerCard({ worker, highlightTerm = "" }) {
@@ -22,6 +23,35 @@ export default function WorkerCard({ worker, highlightTerm = "" }) {
           count: worker.reviewsCount || 0,
           rating: worker.rating || 0,
         };
+
+  const normalizedTerm = highlightTerm
+    ? normalizeArabicText(highlightTerm)
+    : "";
+
+  const residenceText = worker.residence;
+  const addressText = worker.detailedAddress;
+  const governorateText = worker.governorate;
+
+  let locationText = residenceText || addressText || governorateText;
+
+  if (normalizedTerm) {
+    if (
+      residenceText &&
+      normalizeArabicText(residenceText).includes(normalizedTerm)
+    ) {
+      locationText = residenceText;
+    } else if (
+      addressText &&
+      normalizeArabicText(addressText).includes(normalizedTerm)
+    ) {
+      locationText = addressText;
+    } else if (
+      governorateText &&
+      normalizeArabicText(governorateText).includes(normalizedTerm)
+    ) {
+      locationText = governorateText;
+    }
+  }
 
   return (
     <article
@@ -293,7 +323,7 @@ export default function WorkerCard({ worker, highlightTerm = "" }) {
                 {worker.category}
               </span>
 
-              {worker.residence && (
+              {locationText && (
                 <span
                   className="
                     inline-flex
@@ -313,7 +343,14 @@ export default function WorkerCard({ worker, highlightTerm = "" }) {
                     "
                   />
 
-                  {worker.residence}
+                  {highlightTerm ? (
+                    <HighlightedText
+                      text={locationText}
+                      highlight={highlightTerm}
+                    />
+                  ) : (
+                    locationText
+                  )}
                 </span>
               )}
             </div>

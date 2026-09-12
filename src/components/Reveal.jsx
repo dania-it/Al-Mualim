@@ -1,8 +1,5 @@
-// src/components/Reveal.jsx
 import { useEffect, useRef, useState } from 'react';
 
-// بيلف أي قسم ويخليه يظهر بحركة ناعمة (fade + slide up) أول ما يدخل الشاشة وقت السكرول،
-// بدل ما تكون كل الأقسام ثابتة وظاهرة دفعة وحدة من البداية.
 export default function Reveal({ children, delay = 0, className = '' }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -14,7 +11,7 @@ export default function Reveal({ children, delay = 0, className = '' }) {
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
-          observer.disconnect(); // مرة وحدة بس، مش كل ما يدخل ويطلع من الشاشة
+          observer.disconnect();
         }
       },
       { threshold: 0.15 }
