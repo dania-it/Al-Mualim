@@ -1,10 +1,9 @@
-
 import { useState, useEffect } from "react";
 import { getSiteMeta } from "../api/index";
 import Reveal from "../components/Reveal";
 import FeatureCard from "../components/FeatureCard";
 
-import aboutHeroImage from "../assets/Customer_service_agent_working_c…_202608132315.jpeg";
+import aboutHeroImage from "../assets/Customer_service_agent_working_c…_202608132315.jpg";
 
 const VALUES = [
   {
@@ -61,7 +60,7 @@ export default function About() {
                   src={aboutHeroImage}
                   alt="منصة المعلم"
                   className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
+                  fetchpriority="high"
                 />
               </div>
             </div>

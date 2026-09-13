@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
-import imgSlide1 from "../../assets/Gemini_Generated_Image_sn5xr8sn5xr8sn5x.jfif";
-import imgSlide2 from "../../assets/Gemini_Generated_Image_8how128how128how.jfif";
-import imgSlide3 from "../../assets/Gemini_Generated_Image_sn5xr8sn5xr8sn5x (2).jfif";
+import imgSlide1 from "../../assets/Gemini_Generated_Image_sn5xr8sn5xr8sn5x.jpg";
+import imgSlide2 from "../../assets/Gemini_Generated_Image_8how128how128how.jpg";
+import imgSlide3 from "../../assets/Gemini_Generated_Image_sn5xr8sn5xr8sn5x (2).jpg";
 
 const SLIDES = [
   {
@@ -38,6 +38,29 @@ const AUTO_INTERVAL = 5000;
 export default function HeroSlider() {
   const [active, setActive] = useState(0);
   const timerRef = useRef(null);
+
+  const [loadedIndexes, setLoadedIndexes] = useState([0]);
+
+  useEffect(() => {
+    const timers = [];
+
+    SLIDES.forEach((s, index) => {
+      if (index === 0) return; 
+      const timer = setTimeout(() => {
+        const preloadImg = new Image();
+        preloadImg.src = s.image;
+        preloadImg.onload = () => {
+          setLoadedIndexes((prev) =>
+            prev.includes(index) ? prev : [...prev, index],
+          );
+        };
+      }, index * 1200);
+
+      timers.push(timer);
+    });
+
+    return () => timers.forEach(clearTimeout);
+  }, []);
 
   const startTimer = () => {
     clearInterval(timerRef.current);
@@ -95,7 +118,12 @@ export default function HeroSlider() {
               }
             `}
             style={{
-              backgroundImage: `url("${s.image}")`,
+              backgroundImage: loadedIndexes.includes(index)
+                ? `url("${s.image}")`
+                : undefined,
+              backgroundColor: !loadedIndexes.includes(index)
+                ? "#080d28"
+                : undefined,
             }}
           />
         ))}

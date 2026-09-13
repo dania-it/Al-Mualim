@@ -1,6 +1,5 @@
-
 import { Link } from "react-router-dom";
-import imgHero from "../assets/Gemini_Generated_Image_cpavngcpavngcpav.jfif";
+import imgHero from "../assets/Gemini_Generated_Image_cpavngcpavngcpav.jpg";
 import Reveal from "../components/Reveal";
 import FeatureCard from "../components/FeatureCard";
 
@@ -145,7 +144,7 @@ export default function JoinAsWorker() {
                     duration-500
                     group-hover:scale-105
                   "
-                  loading="lazy"
+                  fetchpriority="high"
                 />
               </div>
             </div>

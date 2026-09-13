@@ -303,44 +303,42 @@
       "description": "تركيب كاميرات المراقبة وتوصيلها بالهاتف وتجهيز أجهزة الإنذار.",
       "idNumber": "01023457789"
     },
-    {
-      "id": 11,
-      "title": "تنسيق وزراعة حدائق منزلية",
-      "category": "صيانة",
-      "workerName": "فراس البستاني",
-      "email": "firas.bustani@platform.com",
-      "residence": "دمشق",
-      "detailedAddress": "ركن الدين — حي الأندلس",
-      "status": "approved",
-      "rating": 4,
-      "reviewsCount": 1,
-      "price": 75,
-      "description": "قص الأشجار، شبكات الري الحديثة، وزراعة الشتلات والنجيل الطبيعي.",
-      "workerAvatar": "/src/assets/man.png",
-      "portfolioImages": [
-        "/src/assets/agro1.jpg",
-        "/src/assets/agro2.jpg"
-      ],
-      "idNumber": "01023459789"
-    },
-    {
-      "id": 12,
-      "title": "تنظيف وتعقيم شقق ومنازل بالكامل",
-      "category": "صيانة",
-      "workerName": "مصطفى الشامي",
-      "email": "mustafa.shami@platform.com",
-      "residence": "حمص",
-      "detailedAddress": "حمص القديمة — شارع الساعة",
-      "status": "approved",
-      "rating": 0,
-      "reviewsCount": 0,
-      "price": 70,
-      "description": "تنظيف السجاد، الكنب، الستائر، وتعقيم المطابخ والحمامات بأحدث الأجهزة.",
-      "workerAvatar": [
-        "/src/assets/man3.png"
-      ],
-      "idNumber": "01023458889"
-    },
+{
+  "id": 11,
+  "title": "تنسيق وزراعة حدائق منزلية",
+  "category": "صيانة",
+  "workerName": "فراس البستاني",
+  "email": "firas.bustani@platform.com",
+  "residence": "دمشق",
+  "detailedAddress": "ركن الدين — حي الأندلس",
+  "status": "approved",
+  "rating": 4,
+  "reviewsCount": 1,
+  "price": 75,
+  "description": "قص الأشجار، شبكات الري الحديثة، وزراعة الشتلات والنجيل الطبيعي.",
+  "workerAvatar": "/img/workers/man.jpg",
+  "portfolioImages": [
+    "/img/workers/agro1.jpg",
+    "/img/workers/agro2.jpg"
+  ],
+  "idNumber": "01023459789"
+},
+{
+  "id": 12,
+  "title": "تنظيف وتعقيم شقق ومنازل بالكامل",
+  "category": "صيانة",
+  "workerName": "مصطفى الشامي",
+  "email": "mustafa.shami@platform.com",
+  "residence": "حمص",
+  "detailedAddress": "حمص القديمة — شارع الساعة",
+  "status": "approved",
+  "rating": 0,
+  "reviewsCount": 0,
+  "price": 70,
+  "description": "تنظيف السجاد، الكنب، الستائر، وتعقيم المطابخ والحمامات بأحدث الأجهزة.",
+  "workerAvatar": "/img/workers/man.jpg",
+  "idNumber": "01023458889"
+},
     {
       "id": 13,
       "title": "تركيب جبس بورد وديكورات سقف",

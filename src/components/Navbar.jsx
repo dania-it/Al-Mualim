@@ -36,7 +36,7 @@ export default function Navbar() {
           className="flex items-center shrink-0 relative z-10"
         >
           <img 
-            src="/public/img/logo.png" 
+            src="/img/logo.png" 
             alt="المعلم - Al-Mualim" 
             className="h-20 sm:h-24 md:h-28 w-auto object-contain -my-6 md:-my-8" 
           />

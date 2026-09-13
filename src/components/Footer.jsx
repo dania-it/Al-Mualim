@@ -18,7 +18,7 @@ export default function Footer() {
               className="flex items-center -mt-3 md:-mt-4"
             >
               <img 
-                src="/public/img/logo-gold.png" 
+                src="/img/logo-gold.png" 
                 alt="المعلم - Al-Mualim" 
                 className="h-20 sm:h-24 md:h-26 w-auto object-contain" 
               />
