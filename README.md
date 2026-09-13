@@ -124,14 +124,13 @@ http://localhost:5000
 
 > **Note:** The Back-End server must be running for features that depend on the API to work correctly.
 
-##  Live Demo**Live Demo:** [https://al-mualim-frontend.onrender.com].
-
+🔗 **Live Demo:** [View Live Demo](https://al-mualim-frontend.onrender.com)
 ## Contact
 
 The project is open to future improvements, enhancements, and additional features.
 
 For inquiries about the project or to discuss **possible improvements and future development**, feel free to contact me:
 
-- 📧 **Email:** daniaibesh51@gmail.com
+- 📧 **Email:** [email](daniaibesh51@gmail.com)
 
 Feedback and suggestions regarding the project and user experience are welcome.
