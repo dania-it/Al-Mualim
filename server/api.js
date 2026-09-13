@@ -27,6 +27,17 @@ app.use(express.json({ limit: '15mb' }));
 const readDB = () => JSON.parse(readFileSync(DB_PATH, 'utf-8'));
 const writeDB = (data) => writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf-8');
 
+const sanitizeImagePath = (path) => {
+  if (!path) return path;
+  if (Array.isArray(path)) return path.map(sanitizeImagePath);
+  if (typeof path === 'string') {
+    return path
+      .replace(/\/src\/assets\//g, '/img/workers/')
+      .replace(/man\.png/g, 'man.jpg')
+      .replace(/man3\.png/g, 'man3.jpg');
+  }
+  return path;
+};
 
 app.get('/api/categories', (_req, res) => {
   const { categories } = readDB();
@@ -62,7 +73,13 @@ app.get('/api/workers', (req, res) => {
       .slice(0, parseInt(top));
   }
 
-  res.json(list);
+  const cleanList = list.map(w => ({
+    ...w,
+    workerAvatar: sanitizeImagePath(w.workerAvatar),
+    portfolioImages: sanitizeImagePath(w.portfolioImages)
+  }));
+
+  res.json(cleanList);
 });
 
 app.get('/api/workers/:id', (req, res) => {
@@ -82,6 +99,9 @@ app.get('/api/workers/:id', (req, res) => {
     password,
     ...safeWorker
   } = worker;
+
+  safeWorker.workerAvatar = sanitizeImagePath(safeWorker.workerAvatar);
+  safeWorker.portfolioImages = sanitizeImagePath(safeWorker.portfolioImages);
 
   res.json(safeWorker);
 });
@@ -178,7 +198,6 @@ app.post('/api/workers/login', (req, res) => {
   res.json({ message: 'تم تسجيل الدخول', worker: safe });
 });
 
-
 app.get('/api/clients', (_req, res) => {
   const db = readDB();
   const clients = (db.clients || []).map(({ password: _p, ...c }) => c);
@@ -242,7 +261,6 @@ app.post('/api/admin/login', (req, res) => {
     return res.json({ message: 'تم تسجيل دخول المسؤول', role: 'admin', name: 'مدير المنصة' });
   res.status(401).json({ message: 'بيانات المسؤول غير صحيحة' });
 });
-
 
 app.get('/api/projects', (req, res) => {
   const db = readDB();
@@ -316,6 +334,7 @@ app.patch('/api/clients/:id/block', (req, res) => {
   const { password: _p, ...safe } = db.clients[idx];
   res.json({ message: db.clients[idx].isBlocked ? 'تم حظر الحساب' : 'تم إلغاء الحظر', client: safe });
 });
+
 app.delete('/api/clients/:id', (req, res) => {
   const db = readDB();
   const idx = (db.clients || []).findIndex(c => c.id === parseInt(req.params.id));
