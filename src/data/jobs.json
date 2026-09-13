@@ -316,10 +316,10 @@
   "reviewsCount": 1,
   "price": 75,
   "description": "قص الأشجار، شبكات الري الحديثة، وزراعة الشتلات والنجيل الطبيعي.",
-  "workerAvatar": "/img/workers/man.jpg",
+  "workerAvatar": "public/img/workers/man.jpg",
   "portfolioImages": [
-    "/img/workers/agro1.jpg",
-    "/img/workers/agro2.jpg"
+    "public/img/workers/agro1.jpg",
+    "public/img/workers/agro2.jpg"
   ],
   "idNumber": "01023459789"
 },
@@ -336,7 +336,7 @@
   "reviewsCount": 0,
   "price": 70,
   "description": "تنظيف السجاد، الكنب، الستائر، وتعقيم المطابخ والحمامات بأحدث الأجهزة.",
-  "workerAvatar": "/img/workers/man.jpg",
+  "workerAvatar": "public/img/workers/man3.jpg",
   "idNumber": "01023458889"
 },
     {
