@@ -123,8 +123,13 @@ http://localhost:5000
 ```
 
 > **Note:** The Back-End server must be running for features that depend on the API to work correctly.
+<<<<<<< HEAD
 🔗 **Live Demo:** [View Live Demo](https://al-mualim-frontend.onrender.com)
 
+=======
+
+🔗 **Live Demo:** [View Live Demo](https://al-mualim-frontend.onrender.com)
+>>>>>>> 70904601fe65619717fe5ebb0dfc1cdce3371d8f
 ## Contact
 
 The project is open to future improvements, enhancements, and additional features.
